@@ -16,6 +16,7 @@ namespace Pood
 		SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
 		SqlCommand cmd;
 		SqlDataAdapter adapter_toode, adapter_kat;
+		OpenFileDialog openFileDialog;
 		public Form1()
 		{
 			InitializeComponent();
@@ -60,6 +61,10 @@ namespace Pood
 
 			Toode_pbox.Image = Image.FromFile("../../Images/about.png");
 			Toode_pbox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+			openFileDialog = new OpenFileDialog();
+			openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
 
 			connect.Close();
 			Naita_Kat();
@@ -125,6 +130,8 @@ namespace Pood
 					connect.Close();
 					Kustuta_andmed();
 					Naita_Andmed();
+					//openFileDialog = new OpenFileDialog();
+					//openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
 				}
 				catch (Exception)
 				{
@@ -146,6 +153,52 @@ namespace Pood
 			connect.Close();
 			Naita_Kat();
 			Kustuta_andmed();
+		}
+		//private void Kus_Kas_btn_Click(object sender, EventArgs e)
+		//{
+		//	cmd = new SqlCommand("SELECT Id FROM Kategooria WHERE Kategooris_nimetus=@kat", connect);
+		//	connect.Open();
+		//	cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
+		//	cmd.ExecuteNonQuery();
+		//	Id = Convert.ToInt32(cmd.ExecuteScalar());
+		//	connect.Close();
+		//	if (Id != 0)
+		//	{
+		//		cmd = new SqlCommand("DELETE FROM Kategooria WHERE Id=@id")
+		//	}
+		//}
+
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			if (dataGridView1.SelectedRows.Count == 0)
+				return;
+			string sql = "DELETE FROM Toded WHERE Id = @row10";
+			using (SqlCommand deleteRecord = new SqlCommand(sql, connect))
+			{
+				connect.Open();
+
+				int selectedIndex = dataGridView1.SelectedRows[0].Index;
+				int rowId = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
+
+				deleteRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowId;
+				deleteRecord.ExecuteNonQuery();
+
+				dataGridView1.Rows.RemoveAt(selectedIndex);
+
+				Naita_Kat();
+				Kustuta_andmed();
+			}
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+
 		}
 
 		private void label1_Click_1(object sender, EventArgs e)

@@ -134,12 +134,13 @@
 			// 
 			this.button1.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.button1.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.button1.Location = new System.Drawing.Point(597, 185);
+			this.button1.Location = new System.Drawing.Point(258, 242);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(110, 43);
+			this.button1.Size = new System.Drawing.Size(110, 38);
 			this.button1.TabIndex = 9;
-			this.button1.Text = "Otsi fail";
+			this.button1.Text = "Kustuta";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// button2
 			// 
@@ -151,6 +152,7 @@
 			this.button2.TabIndex = 10;
 			this.button2.Text = "Otsi fail";
 			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// button3
 			// 
@@ -162,12 +164,13 @@
 			this.button3.TabIndex = 11;
 			this.button3.Text = "Uuenda";
 			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// button4
 			// 
 			this.button4.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.button4.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.button4.Location = new System.Drawing.Point(364, 240);
+			this.button4.Location = new System.Drawing.Point(374, 242);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(105, 38);
 			this.button4.TabIndex = 12;
@@ -221,7 +224,7 @@
 			// 
 			this.lisa_kat.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lisa_kat.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.lisa_kat.Location = new System.Drawing.Point(159, 242);
+			this.lisa_kat.Location = new System.Drawing.Point(46, 242);
 			this.lisa_kat.Name = "lisa_kat";
 			this.lisa_kat.Size = new System.Drawing.Size(187, 38);
 			this.lisa_kat.TabIndex = 18;
