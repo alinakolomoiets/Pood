@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace Pood
 		SqlCommand cmd;
 		SqlDataAdapter adapter_toode, adapter_kat;
 		OpenFileDialog openFileDialog;
+		SaveFileDialog save;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -119,19 +122,20 @@ namespace Pood
 			{
 				try
 				{
+					string path = Toode_pbox.ImageLocation;
+					FileInfo fi = new FileInfo(path);
+					string extn = fi.Extension;
 					cmd = new SqlCommand("INSERT INTO Toded (Toode_nimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)", connect);
 					connect.Open();
 					cmd.Parameters.AddWithValue("@toode", Toode.Text);
 					cmd.Parameters.AddWithValue("@kogus", Kogus.Text);
 					cmd.Parameters.AddWithValue("@hind", Hint_txt.Text);//forat andmebaasis ja vormis võrdsed
-					cmd.Parameters.AddWithValue("@pilt", Toode.Text + ".jpg");//format?
+					cmd.Parameters.AddWithValue("@pilt", Toode.Text + extn);//format?
 					cmd.Parameters.AddWithValue("@kat", Kat_cbox.SelectedIndex);//id andmebaasist  võtta
 					cmd.ExecuteNonQuery();
 					connect.Close();
 					Kustuta_andmed();
 					Naita_Andmed();
-					//openFileDialog = new OpenFileDialog();
-					//openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
 				}
 				catch (Exception)
 				{
@@ -154,51 +158,68 @@ namespace Pood
 			Naita_Kat();
 			Kustuta_andmed();
 		}
-		//private void Kus_Kas_btn_Click(object sender, EventArgs e)
-		//{
-		//	cmd = new SqlCommand("SELECT Id FROM Kategooria WHERE Kategooris_nimetus=@kat", connect);
-		//	connect.Open();
-		//	cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
-		//	cmd.ExecuteNonQuery();
-		//	Id = Convert.ToInt32(cmd.ExecuteScalar());
-		//	connect.Close();
-		//	if (Id != 0)
-		//	{
-		//		cmd = new SqlCommand("DELETE FROM Kategooria WHERE Id=@id")
-		//	}
-		//}
-
 
 		private void button1_Click(object sender, EventArgs e)
 		{
 			if (dataGridView1.SelectedRows.Count == 0)
 				return;
-			string sql = "DELETE FROM Toded WHERE Id = @row10";
-			using (SqlCommand deleteRecord = new SqlCommand(sql, connect))
+
+			string sql = "DELETE FROM Toded WHERE Id = @rowID";
+
+			using (SqlCommand deletedRecord = new SqlCommand(sql, connect))
 			{
 				connect.Open();
-
 				int selectedIndex = dataGridView1.SelectedRows[0].Index;
 				int rowId = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
-
-				deleteRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowId;
-				deleteRecord.ExecuteNonQuery();
+				deletedRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowId;
+				deletedRecord.ExecuteNonQuery();
 
 				dataGridView1.Rows.RemoveAt(selectedIndex);
-
-				Naita_Kat();
-				Kustuta_andmed();
 			}
 		}
+
 
 		private void button3_Click(object sender, EventArgs e)
 		{
 
 		}
-
+		Random rand = new Random();
 		private void button2_Click(object sender, EventArgs e)
 		{
+			openFileDialog.InitialDirectory = @"C:\Users\opilane\Images";
+			if(openFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				string ext=Path.GetExtension(openFileDialog.FileName);
+				Toode_pbox.Load(openFileDialog.FileName);
+				Bitmap finalIMG = new Bitmap(Toode_pbox.Image, Toode_pbox.Width, Toode_pbox.Height);
+				Toode_pbox.Image = finalIMG;
+				Toode_pbox.Show();
+				string destiantionFile;
+				try
+				{
+					destiantionFile = @"..\..\Images\" + Toode.Text + ext;
+					File.Copy(openFileDialog.FileName,destiantionFile);
+				}
+				catch
+				{
+					destiantionFile = @"..\..\Images\" + Toode.Text + rand.Next(1, 99999).ToString()+ext;
+					File.Copy(openFileDialog.FileName, destiantionFile);
+				}
+			}
+		}
+		int Id;
 
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+			Id = (int)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+			Toode.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+			Kogus.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+			Hint_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+			Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+
+			string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+			Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
 		}
 
 		private void label1_Click_1(object sender, EventArgs e)

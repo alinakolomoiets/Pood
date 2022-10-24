@@ -37,7 +37,7 @@
 			this.Hind_lbl = new System.Windows.Forms.Label();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.Toode_pbox = new System.Windows.Forms.PictureBox();
-			this.button1 = new System.Windows.Forms.Button();
+			this.kustutaBTN = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
@@ -130,17 +130,17 @@
 			this.Toode_pbox.TabIndex = 8;
 			this.Toode_pbox.TabStop = false;
 			// 
-			// button1
+			// kustutaBTN
 			// 
-			this.button1.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.button1.Location = new System.Drawing.Point(258, 242);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(110, 38);
-			this.button1.TabIndex = 9;
-			this.button1.Text = "Kustuta";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.kustutaBTN.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.kustutaBTN.ForeColor = System.Drawing.Color.MediumSlateBlue;
+			this.kustutaBTN.Location = new System.Drawing.Point(258, 242);
+			this.kustutaBTN.Name = "kustutaBTN";
+			this.kustutaBTN.Size = new System.Drawing.Size(110, 38);
+			this.kustutaBTN.TabIndex = 9;
+			this.kustutaBTN.Text = "Kustuta";
+			this.kustutaBTN.UseVisualStyleBackColor = true;
+			this.kustutaBTN.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// button2
 			// 
@@ -187,6 +187,7 @@
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.Size = new System.Drawing.Size(639, 150);
 			this.dataGridView1.TabIndex = 13;
+			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			// 
 			// contextMenuStrip1
 			// 
@@ -246,7 +247,7 @@
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.kustutaBTN);
 			this.Controls.Add(this.Toode_pbox);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.Hind_lbl);
@@ -274,7 +275,7 @@
 		private System.Windows.Forms.Label Hind_lbl;
 		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.PictureBox Toode_pbox;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button kustutaBTN;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
