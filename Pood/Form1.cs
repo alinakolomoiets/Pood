@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Pood
 {
@@ -75,20 +76,21 @@ namespace Pood
 		public void Naita_Kat()
 		{
 			connect.Open();
-			adapter_kat = new SqlDataAdapter("SELECT Kategooris_nimetus FROM Kategooria", connect);
+			adapter_kat = new SqlDataAdapter("SELECT Kategoorisnimetus FROM Kategooria", connect);
 			DataTable dt_kat = new DataTable();
 			adapter_kat.Fill(dt_kat);
 			foreach (DataRow nimetus in dt_kat.Rows)
 			{
-				Kat_cbox.Items.Add(nimetus["Kategooris_nimetus"]);
+				Kat_cbox.Items.Add(nimetus["Kategoorisnimetus"]);
 			}
 			connect.Close();
+
 		}
 		public void Kustuta_andmed()
 		{
 			Toode.Text = "";
-			Hint_txt.Text = "";
 			Kogus.Text = "";
+			Hint_txt.Text = "";
 			Kat_cbox.Items.Clear();
 		}
 		private void textBox1_TextChanged(object sender, EventArgs e)
@@ -150,7 +152,7 @@ namespace Pood
 
 		private void lisa_kat_Click(object sender, EventArgs e)
 		{
-			cmd = new SqlCommand("INSERT INTO Kategooria( Kategooris_nimetus) VALUES(@kat)", connect);
+			cmd = new SqlCommand("INSERT INTO Kategooria( Kategoorisnimetus) VALUES(@kat)", connect);
 			connect.Open();
 			cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
 			cmd.ExecuteNonQuery();
@@ -161,27 +163,32 @@ namespace Pood
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (dataGridView1.SelectedRows.Count == 0)
-				return;
-
-			string sql = "DELETE FROM Toded WHERE Id = @rowID";
-
-			using (SqlCommand deletedRecord = new SqlCommand(sql, connect))
-			{
-				connect.Open();
-				int selectedIndex = dataGridView1.SelectedRows[0].Index;
-				int rowId = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
-				deletedRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowId;
-				deletedRecord.ExecuteNonQuery();
-
-				dataGridView1.Rows.RemoveAt(selectedIndex);
-			}
+			Toode.Text = "";
+			Kogus.Text = "";
+			Hint_txt.Text = "";
+			Kat_cbox.Items.Clear();
 		}
 
 
 		private void button3_Click(object sender, EventArgs e)
 		{
+			if(Toode.Text != "" && Kogus.Text != "" && Hint_txt.Text != "" && Toode_pbox.Image != null)
+			{
+				cmd = new SqlCommand("UPDATE Tooded SET Toode_nimetus=@toode,Kogus=@kogus,Hind=@hind,Pilt=@pilt WHERE Id=@id", connect);
+				connect.Open();
+				cmd.Parameters.AddWithValue("@id", Id);
+				cmd.Parameters.AddWithValue("@toode", Toode.Text);
+				cmd.Parameters.AddWithValue("@kogus", Kogus.Text);
+				cmd.Parameters.AddWithValue("@hind", Hint_txt.Text.Replace("," , "."));
+				string file_pilt = Toode.Text + ".jpg";//kontroll
+				cmd.Parameters.AddWithValue("@pilt", file_pilt);
+				cmd.ExecuteNonQuery();
+				connect.Close();
+				Naita_Andmed();
+				Kustuta_andmed();
+				MessageBox.Show("Andmed uuendatud");
 
+			}
 		}
 		Random rand = new Random();
 		private void button2_Click(object sender, EventArgs e)
@@ -220,6 +227,31 @@ namespace Pood
 
 			string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
 			Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
+		}
+
+		private void Toode_pbox_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void kustuta_kat_btn_Click(object sender, EventArgs e)
+		{
+			if (Kat_cbox.Text == "")
+				return;
+
+			string sql = "DELETE FROM Kategooria WHERE Kategoorisnimetus = @nimi";
+
+			using (SqlCommand cmd = new SqlCommand(sql, connect))
+			{
+				connect.Open();
+				cmd.Parameters.AddWithValue("@nimi", Kat_cbox.Text);
+				cmd.ExecuteNonQuery();
+				connect.Close();
+
+				Kustuta_andmed();
+				Naita_Andmed();
+			}
+
 		}
 
 		private void label1_Click_1(object sender, EventArgs e)

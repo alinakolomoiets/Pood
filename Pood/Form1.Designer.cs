@@ -39,7 +39,7 @@
 			this.Toode_pbox = new System.Windows.Forms.PictureBox();
 			this.kustutaBTN = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
+			this.Uuenda_btn = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -47,6 +47,7 @@
 			this.kategoria = new System.Windows.Forms.Label();
 			this.Kat_cbox = new System.Windows.Forms.ComboBox();
 			this.lisa_kat = new System.Windows.Forms.Button();
+			this.kustuta_kat_btn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.Toode_pbox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
@@ -129,14 +130,15 @@
 			this.Toode_pbox.Size = new System.Drawing.Size(268, 216);
 			this.Toode_pbox.TabIndex = 8;
 			this.Toode_pbox.TabStop = false;
+			this.Toode_pbox.Click += new System.EventHandler(this.Toode_pbox_Click);
 			// 
 			// kustutaBTN
 			// 
 			this.kustutaBTN.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.kustutaBTN.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.kustutaBTN.Location = new System.Drawing.Point(258, 242);
+			this.kustutaBTN.Location = new System.Drawing.Point(603, 144);
 			this.kustutaBTN.Name = "kustutaBTN";
-			this.kustutaBTN.Size = new System.Drawing.Size(110, 38);
+			this.kustutaBTN.Size = new System.Drawing.Size(107, 38);
 			this.kustutaBTN.TabIndex = 9;
 			this.kustutaBTN.Text = "Kustuta";
 			this.kustutaBTN.UseVisualStyleBackColor = true;
@@ -146,7 +148,7 @@
 			// 
 			this.button2.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.button2.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.button2.Location = new System.Drawing.Point(597, 240);
+			this.button2.Location = new System.Drawing.Point(597, 12);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(110, 38);
 			this.button2.TabIndex = 10;
@@ -154,23 +156,23 @@
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
-			// button3
+			// Uuenda_btn
 			// 
-			this.button3.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button3.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.button3.Location = new System.Drawing.Point(485, 240);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(104, 38);
-			this.button3.TabIndex = 11;
-			this.button3.Text = "Uuenda";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.Uuenda_btn.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Uuenda_btn.ForeColor = System.Drawing.Color.MediumSlateBlue;
+			this.Uuenda_btn.Location = new System.Drawing.Point(603, 56);
+			this.Uuenda_btn.Name = "Uuenda_btn";
+			this.Uuenda_btn.Size = new System.Drawing.Size(104, 38);
+			this.Uuenda_btn.TabIndex = 11;
+			this.Uuenda_btn.Text = "Uuenda";
+			this.Uuenda_btn.UseVisualStyleBackColor = true;
+			this.Uuenda_btn.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// button4
 			// 
 			this.button4.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.button4.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.button4.Location = new System.Drawing.Point(374, 242);
+			this.button4.Location = new System.Drawing.Point(603, 100);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(105, 38);
 			this.button4.TabIndex = 12;
@@ -225,7 +227,7 @@
 			// 
 			this.lisa_kat.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lisa_kat.ForeColor = System.Drawing.Color.MediumSlateBlue;
-			this.lisa_kat.Location = new System.Drawing.Point(46, 242);
+			this.lisa_kat.Location = new System.Drawing.Point(180, 242);
 			this.lisa_kat.Name = "lisa_kat";
 			this.lisa_kat.Size = new System.Drawing.Size(187, 38);
 			this.lisa_kat.TabIndex = 18;
@@ -233,19 +235,32 @@
 			this.lisa_kat.UseVisualStyleBackColor = true;
 			this.lisa_kat.Click += new System.EventHandler(this.lisa_kat_Click);
 			// 
+			// kustuta_kat_btn
+			// 
+			this.kustuta_kat_btn.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F);
+			this.kustuta_kat_btn.ForeColor = System.Drawing.Color.MediumSlateBlue;
+			this.kustuta_kat_btn.Location = new System.Drawing.Point(383, 242);
+			this.kustuta_kat_btn.Name = "kustuta_kat_btn";
+			this.kustuta_kat_btn.Size = new System.Drawing.Size(218, 38);
+			this.kustuta_kat_btn.TabIndex = 19;
+			this.kustuta_kat_btn.Text = "Kustuta kategooriaa";
+			this.kustuta_kat_btn.UseVisualStyleBackColor = true;
+			this.kustuta_kat_btn.Click += new System.EventHandler(this.kustuta_kat_btn_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.kustuta_kat_btn);
 			this.Controls.Add(this.lisa_kat);
 			this.Controls.Add(this.Kat_cbox);
 			this.Controls.Add(this.kategoria);
 			this.Controls.Add(this.Hint_txt);
 			this.Controls.Add(this.dataGridView1);
 			this.Controls.Add(this.button4);
-			this.Controls.Add(this.button3);
+			this.Controls.Add(this.Uuenda_btn);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.kustutaBTN);
 			this.Controls.Add(this.Toode_pbox);
@@ -277,7 +292,7 @@
 		private System.Windows.Forms.PictureBox Toode_pbox;
 		private System.Windows.Forms.Button kustutaBTN;
 		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button Uuenda_btn;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -285,6 +300,7 @@
 		private System.Windows.Forms.Label kategoria;
 		private System.Windows.Forms.ComboBox Kat_cbox;
 		private System.Windows.Forms.Button lisa_kat;
+		private System.Windows.Forms.Button kustuta_kat_btn;
 	}
 }
 
