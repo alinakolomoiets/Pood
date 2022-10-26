@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace Pood
 {
-	public partial class Form1 : Form
+	public partial class Tooded : Form
 	{
 		SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
 		SqlCommand cmd;
@@ -21,10 +20,17 @@ namespace Pood
 		OpenFileDialog openFileDialog;
 		SaveFileDialog save;
 
-		public Form1()
+		public Tooded()
 		{
 			InitializeComponent();
 			Naita_Andmed();
+		}
+		public void Kustuta_andmed()
+		{
+			Toode.Text = "";
+			Kogus.Text = "";
+			Hint_txt.Text = "";
+			Kat_cbox.Items.Clear();
 		}
 		public void Lisa_Andmed()
 		{
@@ -32,12 +38,12 @@ namespace Pood
 			{
 				try
 				{
-					cmd = new SqlCommand("INSERT INTO Toded (Toode nimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)",connect);
+					cmd = new SqlCommand("INSERT INTO Toded (Toode_nimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)",connect);
 					connect.Open();
 					cmd.Parameters.AddWithValue("@toode", Toode.Text);
 					cmd.Parameters.AddWithValue("@kogus", Kogus.Text);
 					cmd.Parameters.AddWithValue("@hind", Hint_txt.Text);//forat andmebaasis ja vormis võrdsed
-					cmd.Parameters.AddWithValue("@pilt", Toode.Text+".png");//format?
+					cmd.Parameters.AddWithValue("@pilt", Toode.Text+".jpg");//format?
 					cmd.Parameters.AddWithValue("@kat", Kat_cbox.SelectedIndex);//id andmebaasist  võtta
 					cmd.ExecuteNonQuery();
 					connect.Close();
@@ -86,13 +92,6 @@ namespace Pood
 			connect.Close();
 
 		}
-		public void Kustuta_andmed()
-		{
-			Toode.Text = "";
-			Kogus.Text = "";
-			Hint_txt.Text = "";
-			Kat_cbox.Items.Clear();
-		}
 		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
 
@@ -124,15 +123,12 @@ namespace Pood
 			{
 				try
 				{
-					string path = Toode_pbox.ImageLocation;
-					FileInfo fi = new FileInfo(path);
-					string extn = fi.Extension;
 					cmd = new SqlCommand("INSERT INTO Toded (Toode_nimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)", connect);
 					connect.Open();
 					cmd.Parameters.AddWithValue("@toode", Toode.Text);
 					cmd.Parameters.AddWithValue("@kogus", Kogus.Text);
 					cmd.Parameters.AddWithValue("@hind", Hint_txt.Text);//forat andmebaasis ja vormis võrdsed
-					cmd.Parameters.AddWithValue("@pilt", Toode.Text + extn);//format?
+					cmd.Parameters.AddWithValue("@pilt", Toode.Text + ".jpg");//format?
 					cmd.Parameters.AddWithValue("@kat", Kat_cbox.SelectedIndex);//id andmebaasist  võtta
 					cmd.ExecuteNonQuery();
 					connect.Close();
@@ -160,13 +156,35 @@ namespace Pood
 			Naita_Kat();
 			Kustuta_andmed();
 		}
-
-		private void button1_Click(object sender, EventArgs e)
+		int Id;
+		private void button1_Click(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			Toode.Text = "";
-			Kogus.Text = "";
-			Hint_txt.Text = "";
-			Kat_cbox.Items.Clear();
+		}
+		private void kustuta_kat_btn_Click(object sender, EventArgs e)
+		{
+			cmd = new SqlCommand("SELECT Id FROM Kategooria WHERE Kategoorisnimetus=@kat", connect);
+			connect.Open();
+			cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
+			cmd.ExecuteNonQuery();
+			Id = Convert.ToInt32(cmd.ExecuteScalar());
+			connect.Close();
+			if (Id != 0)
+			{
+				cmd = new SqlCommand("DELETE FROM Kategooria WHERE Id=@id", connect);
+				connect.Open();
+				cmd.Parameters.AddWithValue("@id", Id);
+				cmd.ExecuteNonQuery();
+				connect.Close();
+				Kustuta_andmed();
+				Naita_Kat();
+				MessageBox.Show("Andmed tabelist Kategooria on kustutatud");
+			}
+			else
+			{
+				MessageBox.Show("Viga kustutamisega");
+			}
+			connect.Close();
+
 		}
 
 
@@ -174,7 +192,7 @@ namespace Pood
 		{
 			if(Toode.Text != "" && Kogus.Text != "" && Hint_txt.Text != "" && Toode_pbox.Image != null)
 			{
-				cmd = new SqlCommand("UPDATE Tooded SET Toode_nimetus=@toode,Kogus=@kogus,Hind=@hind,Pilt=@pilt WHERE Id=@id", connect);
+				cmd = new SqlCommand("UPDATE Toded SET Toode_nimetus=@toode,Kogus=@kogus,Hind=@hind,Pilt=@pilt WHERE Id=@id", connect);
 				connect.Open();
 				cmd.Parameters.AddWithValue("@id", Id);
 				cmd.Parameters.AddWithValue("@toode", Toode.Text);
@@ -214,7 +232,6 @@ namespace Pood
 				}
 			}
 		}
-		int Id;
 
 		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
@@ -225,8 +242,15 @@ namespace Pood
 
 			Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
 
-			string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-			Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
+			try
+			{
+				Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+			}
+			catch (Exception)
+			{
+				Toode_pbox.Image = Image.FromFile(@"..\..\Images\about.png");
+				MessageBox.Show("Fail puudub");
+			}
 		}
 
 		private void Toode_pbox_Click(object sender, EventArgs e)
@@ -234,24 +258,43 @@ namespace Pood
 
 		}
 
-		private void kustuta_kat_btn_Click(object sender, EventArgs e)
+		private void kustutaBTN_Click(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			if (Kat_cbox.Text == "")
-				return;
-
-			string sql = "DELETE FROM Kategooria WHERE Kategoorisnimetus = @nimi";
-
-			using (SqlCommand cmd = new SqlCommand(sql, connect))
+			Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+			if (Id != 0)
 			{
+				cmd = new SqlCommand("DELETE Toded WHERE Id=@id", connect);
 				connect.Open();
-				cmd.Parameters.AddWithValue("@nimi", Kat_cbox.Text);
+				cmd.Parameters.AddWithValue("@id", Id);
 				cmd.ExecuteNonQuery();
 				connect.Close();
-
-				Kustuta_andmed();
 				Naita_Andmed();
+				Kustuta_andmed();
+				MessageBox.Show("Andmed tabelist Tooded on kustutatud");
 			}
+			else
+			{
+				MessageBox.Show("Viga Tooded tabelist andmete kustutamisega");
+			}
+		}
 
+		private void kustutaBTN_Click(object sender, EventArgs e)
+		{
+			if (dataGridView1.SelectedRows.Count == 0)
+				return;
+
+			string sql = "DELETE FROM Toded WHERE Id = @rowID";
+
+			using (SqlCommand deletedRecord = new SqlCommand(sql, connect))
+			{
+				connect.Open();
+				int selectedIndex = dataGridView1.SelectedRows[0].Index;
+				int rowId = Convert.ToInt32(dataGridView1[0, selectedIndex].Value);
+				deletedRecord.Parameters.Add("@rowID", SqlDbType.Int).Value = rowId;
+				deletedRecord.ExecuteNonQuery();
+
+				dataGridView1.Rows.RemoveAt(selectedIndex);
+			}
 		}
 
 		private void label1_Click_1(object sender, EventArgs e)

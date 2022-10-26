@@ -1,6 +1,6 @@
 ﻿namespace Pood
 {
-	partial class Form1
+	partial class Tooded
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -142,7 +142,7 @@
 			this.kustutaBTN.TabIndex = 9;
 			this.kustutaBTN.Text = "Kustuta";
 			this.kustutaBTN.UseVisualStyleBackColor = true;
-			this.kustutaBTN.Click += new System.EventHandler(this.button1_Click);
+			this.kustutaBTN.Click += new System.EventHandler(this.kustutaBTN_Click);
 			// 
 			// button2
 			// 
