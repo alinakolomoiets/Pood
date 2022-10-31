@@ -14,7 +14,7 @@ namespace Pood
 {
 	public partial class Tooded : Form
 	{
-		SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+		SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
 		SqlCommand cmd;
 		SqlDataAdapter adapter_toode, adapter_kat;
 		OpenFileDialog openFileDialog;
@@ -38,7 +38,7 @@ namespace Pood
 			{
 				try
 				{
-					cmd = new SqlCommand("INSERT INTO Toded (Toode_nimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)",connect);
+					cmd = new SqlCommand("INSERT INTO Toded (Toodenimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)",connect);
 					connect.Open();
 					cmd.Parameters.AddWithValue("@toode", Toode.Text);
 					cmd.Parameters.AddWithValue("@kogus", Kogus.Text);
@@ -59,25 +59,6 @@ namespace Pood
 			{
 				MessageBox.Show("Sisesta andmed");
 			}
-		}
-		public void Naita_Andmed()
-		{
-			connect.Open();
-			DataTable dt = new DataTable();
-			//cmd = new SqlCommand("SELECT * FROM Toodedtable" , connect);
-			adapter_toode = new SqlDataAdapter("SELECT * FROM Toded", connect);
-			adapter_toode.Fill(dt);
-			dataGridView1.DataSource = dt;
-
-			Toode_pbox.Image = Image.FromFile("../../Images/about.png");
-			Toode_pbox.SizeMode = PictureBoxSizeMode.StretchImage;
-
-
-			openFileDialog = new OpenFileDialog();
-			openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All files (*.*)|*.*";
-
-			connect.Close();
-			Naita_Kat();
 		}
 		public void Naita_Kat()
 		{
@@ -123,7 +104,7 @@ namespace Pood
 			{
 				try
 				{
-					cmd = new SqlCommand("INSERT INTO Toded (Toode_nimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)", connect);
+					cmd = new SqlCommand("INSERT INTO Toded (Toodenimetus , Kogus , Hind, Pilt , KategooriaID) VALUES(@toode,@kogus,@hind,@pilt,@kat)", connect);
 					connect.Open();
 					cmd.Parameters.AddWithValue("@toode", Toode.Text);
 					cmd.Parameters.AddWithValue("@kogus", Kogus.Text);
@@ -239,9 +220,7 @@ namespace Pood
 			Toode.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
 			Kogus.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
 			Hint_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-			Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-
+			//Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
 			try
 			{
 				Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
@@ -251,7 +230,9 @@ namespace Pood
 				Toode_pbox.Image = Image.FromFile(@"..\..\Images\about.png");
 				MessageBox.Show("Fail puudub");
 			}
-		}
+            string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+            Kat_cbox.SelectedIndex = Int32.Parse(v) - 1;
+        }
 
 		private void Toode_pbox_Click(object sender, EventArgs e)
 		{
@@ -301,5 +282,19 @@ namespace Pood
 		{
 
 		}
-	}
+        public void Naita_Andmed()
+        {
+            connect.Open();
+            DataTable dt = new DataTable();
+            //cmd = new SqlCommand("SELECT * FROM Toodedtable" , connect);
+            adapter_toode = new SqlDataAdapter("SELECT * FROM Toded", connect);
+            adapter_toode.Fill(dt);
+            dataGridView1.DataSource = dt;
+
+            Toode_pbox.Image = Image.FromFile("../../Images/about.png");
+            Toode_pbox.SizeMode = PictureBoxSizeMode.StretchImage;
+            connect.Close();
+            Naita_Kat();
+        }
+    }
 }
