@@ -14,7 +14,7 @@ namespace Pood
 {
 	public partial class Tooded : Form
 	{
-		SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+		SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
 		SqlCommand cmd;
 		SqlDataAdapter adapter_toode, adapter_kat;
 		OpenFileDialog openFileDialog;
@@ -168,7 +168,6 @@ namespace Pood
 
 		}
 
-
 		private void button3_Click(object sender, EventArgs e)
 		{
 			if(Toode.Text != "" && Kogus.Text != "" && Hint_txt.Text != "" && Toode_pbox.Image != null)
@@ -186,7 +185,6 @@ namespace Pood
 				Naita_Andmed();
 				Kustuta_andmed();
 				MessageBox.Show("Andmed uuendatud");
-
 			}
 		}
 		Random rand = new Random();

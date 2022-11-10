@@ -17,7 +17,9 @@ namespace Pood
 {
     public partial class Kassa : Form
     {
-        SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+        
+        SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+        SqlCommand cmd;
         SqlDataAdapter adapter_toode , adapter_kat;
 
         public Kassa()
@@ -29,7 +31,6 @@ namespace Pood
         Random rnd = new Random();
         private void Check_pdf_click_Click(object sender, EventArgs e)
         {
-
             document = new Document();//using Aspose.Pdf
             var page = document.Pages.Add();
             page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("Toode      Hind      Kogus      Summa"));
@@ -38,17 +39,18 @@ namespace Pood
                 page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(toode));
             }
             int num = rnd.Next(0, 100000);
-            document.Save(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Arved\Arve" + num + ".pdf");
+            document.Save(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\Arved\Arve" + num + ".pdf");
             document.Dispose();
-            System.Diagnostics.Process.Start(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Arved\Arve" + num + ".pdf");
+            System.Diagnostics.Process.Start(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\Arved\Arve" + num + ".pdf");
         }
         int Id;
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
             Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
             Toode.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            Kogus.Text = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
-            Hint_txt.Text =Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+            Kogus.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            Hint_txt.Text =dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
 
             Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
 
@@ -61,7 +63,6 @@ namespace Pood
                 Toode_pbox.Image = Image.FromFile(@"..\..\Images\about.png");
                 MessageBox.Show("Fail puudub");
             }
-            string v = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
         }
         List<string> Tooded_list = new List<string>();
         private void Check_btn_click_Click(object sender, EventArgs e)
@@ -85,7 +86,43 @@ namespace Pood
             Toode_pbox.Image = Image.FromFile("../../Images/about.png");
             connect.Close();
         }
-    
-    }
 
+		private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+		{
+            Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+            Toode.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            Kogus.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            Hint_txt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+            Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+
+            try
+            {
+                Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+            }
+            catch (Exception)
+            {
+                Toode_pbox.Image = Image.FromFile(@"..\..\Images\about.png");
+                MessageBox.Show("Fail puudub");
+            }
+            cmd = new SqlCommand("UPDATE Toodetable SET Kogus=@kogus WHERE Toodenimetus=@nimi", connect);
+
+            connect.Open();
+            string Toodenimi1 = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            cmd.Parameters.AddWithValue("@nimi", Toodenimi1); ;
+            int kogus_list_1 = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()) - 1;
+            cmd.Parameters.AddWithValue("@kogus", kogus_list_1);
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+		private void Toode_TextChanged(object sender, EventArgs e)
+		{
+          
+        }
+		private void Kogus_TextChanged(object sender, EventArgs e)
+		{
+         
+        }
+    }
 }

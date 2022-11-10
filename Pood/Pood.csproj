@@ -51,13 +51,6 @@
     <Reference Include="Aspose.PDF, Version=22.10.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.PDF.22.10.0\lib\net4.0\Aspose.PDF.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Words, Version=22.10.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Words.22.10.0\lib\net461\Aspose.Words.dll</HintPath>
-    </Reference>
-    <Reference Include="Aspose.Words.Pdf2Word, Version=22.10.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Words.22.10.0\lib\net461\Aspose.Words.Pdf2Word.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
@@ -84,6 +77,12 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registreerimine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registreerimine.Designer.cs">
+      <DependentUpon>Registreerimine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tooded.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registreerimine.resx">
+      <DependentUpon>Registreerimine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tooded.resx">
       <DependentUpon>Tooded.cs</DependentUpon>
