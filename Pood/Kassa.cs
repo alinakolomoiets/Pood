@@ -44,26 +44,7 @@ namespace Pood
             System.Diagnostics.Process.Start(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\Arved\Arve" + num + ".pdf");
         }
         int Id;
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-            Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-            Toode.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            Kogus.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            Hint_txt.Text =dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-            Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-
-            try
-            {
-                Toode_pbox.Image = Image.FromFile(@"..\..\Images\" + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-            }
-            catch (Exception)
-            {
-                Toode_pbox.Image = Image.FromFile(@"..\..\Images\about.png");
-                MessageBox.Show("Fail puudub");
-            }
-        }
         List<string> Tooded_list = new List<string>();
         private void Check_btn_click_Click(object sender, EventArgs e)
         {
@@ -105,15 +86,6 @@ namespace Pood
                 Toode_pbox.Image = Image.FromFile(@"..\..\Images\about.png");
                 MessageBox.Show("Fail puudub");
             }
-            cmd = new SqlCommand("UPDATE Toodetable SET Kogus=@kogus WHERE Toodenimetus=@nimi", connect);
-
-            connect.Open();
-            string Toodenimi1 = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            cmd.Parameters.AddWithValue("@nimi", Toodenimi1); ;
-            int kogus_list_1 = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()) - 1;
-            cmd.Parameters.AddWithValue("@kogus", kogus_list_1);
-            cmd.ExecuteNonQuery();
-            connect.Close();
         }
 
 		private void Toode_TextChanged(object sender, EventArgs e)

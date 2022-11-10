@@ -143,6 +143,7 @@ namespace Pood
 		}
 		private void kustuta_kat_btn_Click(object sender, EventArgs e)
 		{
+
 			cmd = new SqlCommand("SELECT Id FROM Kategooria WHERE Kategoorisnimetus=@kat", connect);
 			connect.Open();
 			cmd.Parameters.AddWithValue("@kat", Kat_cbox.Text);
@@ -280,7 +281,13 @@ namespace Pood
 		{
 
 		}
-        public void Naita_Andmed()
+
+		private void Kat_cbox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		public void Naita_Andmed()
         {
             connect.Open();
             DataTable dt = new DataTable();
@@ -294,5 +301,6 @@ namespace Pood
             connect.Close();
             Naita_Kat();
         }
+		//FNBIOUBNFDUIOJOIFNÖDS
     }
 }

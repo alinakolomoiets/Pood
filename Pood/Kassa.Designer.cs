@@ -97,7 +97,7 @@
 			this.Toode_lbl.AutoSize = true;
 			this.Toode_lbl.BackColor = System.Drawing.Color.Transparent;
 			this.Toode_lbl.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Toode_lbl.ForeColor = System.Drawing.Color.MediumPurple;
+			this.Toode_lbl.ForeColor = System.Drawing.Color.MediumSlateBlue;
 			this.Toode_lbl.Location = new System.Drawing.Point(58, 55);
 			this.Toode_lbl.Name = "Toode_lbl";
 			this.Toode_lbl.Size = new System.Drawing.Size(139, 19);
@@ -123,6 +123,7 @@
 			// Check_btn_click
 			// 
 			this.Check_btn_click.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F);
+			this.Check_btn_click.ForeColor = System.Drawing.Color.MediumSlateBlue;
 			this.Check_btn_click.Location = new System.Drawing.Point(659, 28);
 			this.Check_btn_click.Name = "Check_btn_click";
 			this.Check_btn_click.Size = new System.Drawing.Size(103, 46);
@@ -134,6 +135,7 @@
 			// Kustuta_btn_Click
 			// 
 			this.Kustuta_btn_Click.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F);
+			this.Kustuta_btn_Click.ForeColor = System.Drawing.Color.MediumSlateBlue;
 			this.Kustuta_btn_Click.Location = new System.Drawing.Point(659, 110);
 			this.Kustuta_btn_Click.Name = "Kustuta_btn_Click";
 			this.Kustuta_btn_Click.Size = new System.Drawing.Size(104, 46);
@@ -145,6 +147,7 @@
 			// Check_pdf_click
 			// 
 			this.Check_pdf_click.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F);
+			this.Check_pdf_click.ForeColor = System.Drawing.Color.MediumSlateBlue;
 			this.Check_pdf_click.Location = new System.Drawing.Point(659, 183);
 			this.Check_pdf_click.Name = "Check_pdf_click";
 			this.Check_pdf_click.Size = new System.Drawing.Size(103, 46);
