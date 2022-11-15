@@ -30,5 +30,17 @@ namespace Pood
             Tooded tooded = new Tooded();
             tooded.ShowDialog();
         }
-    }
+
+		private void Registr_btn_Click(object sender, EventArgs e)
+		{
+            Kasutaja registreerimine = new Kasutaja();
+            registreerimine.ShowDialog();
+        }
+
+		private void Omanik_btn_Click(object sender, EventArgs e)
+		{
+            Omanik omanik = new Omanik();
+            omanik.ShowDialog();
+        }
+	}
 }

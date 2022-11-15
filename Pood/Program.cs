@@ -16,7 +16,7 @@ namespace Pood
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Registreerimine());
+			Application.Run(new Menu());
 		}
 	}
 }

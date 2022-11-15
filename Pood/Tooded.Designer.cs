@@ -48,6 +48,7 @@
 			this.Kat_cbox = new System.Windows.Forms.ComboBox();
 			this.lisa_kat = new System.Windows.Forms.Button();
 			this.kustuta_kat_btn = new System.Windows.Forms.Button();
+			this.Kassa_btn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.Toode_pbox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
@@ -248,12 +249,25 @@
 			this.kustuta_kat_btn.UseVisualStyleBackColor = true;
 			this.kustuta_kat_btn.Click += new System.EventHandler(this.kustuta_kat_btn_Click);
 			// 
+			// Kassa_btn
+			// 
+			this.Kassa_btn.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Kassa_btn.ForeColor = System.Drawing.Color.MediumSlateBlue;
+			this.Kassa_btn.Location = new System.Drawing.Point(603, 190);
+			this.Kassa_btn.Name = "Kassa_btn";
+			this.Kassa_btn.Size = new System.Drawing.Size(107, 38);
+			this.Kassa_btn.TabIndex = 20;
+			this.Kassa_btn.Text = "Kassa";
+			this.Kassa_btn.UseVisualStyleBackColor = true;
+			this.Kassa_btn.Click += new System.EventHandler(this.Kassa_btn_Click);
+			// 
 			// Tooded
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.Kassa_btn);
 			this.Controls.Add(this.kustuta_kat_btn);
 			this.Controls.Add(this.lisa_kat);
 			this.Controls.Add(this.Kat_cbox);
@@ -302,6 +316,7 @@
 		private System.Windows.Forms.ComboBox Kat_cbox;
 		private System.Windows.Forms.Button lisa_kat;
 		private System.Windows.Forms.Button kustuta_kat_btn;
+		private System.Windows.Forms.Button Kassa_btn;
 	}
 }
 

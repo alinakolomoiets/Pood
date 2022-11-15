@@ -287,6 +287,11 @@ namespace Pood
 
 		}
 
+		private void Kassa_btn_Click(object sender, EventArgs e)
+		{
+
+		}
+
 		public void Naita_Andmed()
         {
             connect.Open();
