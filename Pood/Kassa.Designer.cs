@@ -161,7 +161,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.ClientSize = new System.Drawing.Size(1311, 671);
 			this.Controls.Add(this.Check_pdf_click);
 			this.Controls.Add(this.Kustuta_btn_Click);
 			this.Controls.Add(this.Check_btn_click);

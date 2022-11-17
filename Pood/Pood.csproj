@@ -141,6 +141,7 @@
       <DependentUpon>Tooded_DB.mdf</DependentUpon>
     </Content>
     <Content Include="Images\about.png" />
+    <Content Include="Kategooria_pilt\Toidupood.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

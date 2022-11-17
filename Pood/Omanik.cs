@@ -31,27 +31,25 @@ namespace Pood
 
 		private void Sisend_Click(object sender, EventArgs e)
 		{
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Registreerimine where login=@nimi and pasword=@parool", connect);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Omanik where login=@nimi and password=@parool", connect);
             cmd.Parameters.AddWithValue("@nimi",Nimi.Text);
             cmd.Parameters.AddWithValue("@parool",Parool.Text);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            sda.Fill(dt);
-            //Connection open here   
+            sda.Fill(dt); 
             connect.Open();
             int i = cmd.ExecuteNonQuery();
             connect.Close();
             if (dt.Rows.Count > 0)
             {
                 MessageBox.Show("OLED SEES");
-                //after successful it will redirect  to next page .  
+ 
                 Tooded tooded = new Tooded();
                 tooded.Show();
             }
             else
             {
                 MessageBox.Show("Vale,proovige uuesti");
-
             }
         }
 	}

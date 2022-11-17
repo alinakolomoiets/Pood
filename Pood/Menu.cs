@@ -33,8 +33,8 @@ namespace Pood
 
 		private void Registr_btn_Click(object sender, EventArgs e)
 		{
-            Kasutaja registreerimine = new Kasutaja();
-            registreerimine.ShowDialog();
+            Kasutaja kasutaja= new Kasutaja();
+            kasutaja.ShowDialog();
         }
 
 		private void Omanik_btn_Click(object sender, EventArgs e)

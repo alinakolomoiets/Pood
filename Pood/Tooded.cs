@@ -289,7 +289,8 @@ namespace Pood
 
 		private void Kassa_btn_Click(object sender, EventArgs e)
 		{
-
+			Kassa kassa = new Kassa();
+			kassa.ShowDialog();
 		}
 
 		public void Naita_Andmed()

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Aspose.Pdf;
 using Image = System.Drawing.Image;
 
+
 namespace Pood
 {
     public partial class Kassa : Form
@@ -20,7 +21,9 @@ namespace Pood
         
         SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlCommand cmd;
-        SqlDataAdapter adapter_toode , adapter_kat;
+        SqlDataAdapter adapter_toode , adapter_kat , failinimi_adap;
+        TabControl kategooriad;
+        PictureBox pictureBox;
 
         public Kassa()
         {
@@ -31,7 +34,7 @@ namespace Pood
         Random rnd = new Random();
         private void Check_pdf_click_Click(object sender, EventArgs e)
         {
-            document = new Document();//using Aspose.Pdf
+            document = new Document();
             var page = document.Pages.Add();
             page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("Toode      Hind      Kogus      Summa"));
             foreach (var toode in Tooded_list)

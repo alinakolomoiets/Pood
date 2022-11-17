@@ -36,19 +36,18 @@ namespace Pood
 
 		private void Sisend_Click_1(object sender, EventArgs e)
 		{
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Registreerimine where login=@nimi , pasword=@parool", connect);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Kasutaja where login=@nimi and password=@parool", connect);
             cmd.Parameters.AddWithValue("@nimi", Nimi.Text);
             cmd.Parameters.AddWithValue("@parool", Parool.Text);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-
             connect.Open();
             int i = cmd.ExecuteNonQuery();
             connect.Close();
             if (dt.Rows.Count > 0)
             {
-                MessageBox.Show("TEIE ANDMED ON ANDMEBAASI SISSESTATUD :D");
+                MessageBox.Show("OLED SEES");
 
                 Kassa kassa = new Kassa();
                 kassa.Show();
@@ -62,7 +61,7 @@ namespace Pood
 		private void Registrerimine_Click(object sender, EventArgs e)
         {
             
-                    cmd = new SqlCommand("INSERT INTO Registreerimine (login,pasword) VALUES(@nimi,@parool)", connect);
+                    cmd = new SqlCommand("INSERT INTO Kasutaja (login,password) VALUES(@nimi,@parool)", connect);
                     connect.Open();
                     cmd.Parameters.AddWithValue("@nimi", Nimi.Text);
                     cmd.Parameters.AddWithValue("@parool", Parool.Text);
@@ -80,8 +79,7 @@ namespace Pood
         {
             connect.Open();
             DataTable dt = new DataTable();
-            //cmd = new SqlCommand("SELECT * FROM Toodedtable" , connect);
-            adapter_toode = new SqlDataAdapter("SELECT * FROM Registreerimine", connect);
+            adapter_toode = new SqlDataAdapter("SELECT * FROM Kasutaja", connect);
             adapter_toode.Fill(dt);
 
             connect.Close();
