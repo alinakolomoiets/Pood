@@ -18,8 +18,9 @@ namespace Pood
 {
     public partial class Kassa : Form
     {
-        
-        SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+
+        //SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+        SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\opilane\source\repos\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
         SqlCommand cmd;
         SqlDataAdapter adapter_toode , adapter_kat , failinimi_adap;
         TabControl kategooriad;
@@ -30,6 +31,7 @@ namespace Pood
             InitializeComponent();
             Naita_Andmed();
         }
+       
         Document document;
         Random rnd = new Random();
         private void Check_pdf_click_Click(object sender, EventArgs e)
@@ -42,9 +44,11 @@ namespace Pood
                 page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(toode));
             }
             int num = rnd.Next(0, 100000);
-            document.Save(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\Arved\Arve" + num + ".pdf");
+            //document.Save(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\Arved\Arve" + num + ".pdf");
+            document.Save(@"C:\opilane\source\repos\Pood\Pood\Arved\Arve" + num + ".pdf");
             document.Dispose();
-            System.Diagnostics.Process.Start(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\Arved\Arve" + num + ".pdf");
+            //System.Diagnostics.Process.Start(@"C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\Arved\Arve" + num + ".pdf");
+            System.Diagnostics.Process.Start(@"C:\opilane\source\repos\Pood\Pood\Arved\Arve" + num + ".pdf");
         }
         int Id;
 
@@ -91,7 +95,14 @@ namespace Pood
             }
         }
 
-		private void Toode_TextChanged(object sender, EventArgs e)
+		private void Kat_boxi_Click(object sender, EventArgs e)
+		{
+            Kategooria kategooria = new Kategooria();
+            kategooria.Show();
+
+        }
+
+        private void Toode_TextChanged(object sender, EventArgs e)
 		{
           
         }

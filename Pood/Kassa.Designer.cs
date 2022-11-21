@@ -39,6 +39,7 @@
 			this.Check_btn_click = new System.Windows.Forms.Button();
 			this.Kustuta_btn_Click = new System.Windows.Forms.Button();
 			this.Check_pdf_click = new System.Windows.Forms.Button();
+			this.Kat_boxi = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Toode_pbox)).BeginInit();
 			this.SuspendLayout();
@@ -156,12 +157,25 @@
 			this.Check_pdf_click.UseVisualStyleBackColor = true;
 			this.Check_pdf_click.Click += new System.EventHandler(this.Check_pdf_click_Click);
 			// 
+			// Kat_boxi
+			// 
+			this.Kat_boxi.Font = new System.Drawing.Font("SimSun-ExtB", 14.25F);
+			this.Kat_boxi.ForeColor = System.Drawing.Color.MediumSlateBlue;
+			this.Kat_boxi.Location = new System.Drawing.Point(116, 202);
+			this.Kat_boxi.Name = "Kat_boxi";
+			this.Kat_boxi.Size = new System.Drawing.Size(195, 27);
+			this.Kat_boxi.TabIndex = 39;
+			this.Kat_boxi.Text = "Kategooria ";
+			this.Kat_boxi.UseVisualStyleBackColor = true;
+			this.Kat_boxi.Click += new System.EventHandler(this.Kat_boxi_Click);
+			// 
 			// Kassa
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-			this.ClientSize = new System.Drawing.Size(1311, 671);
+			this.ClientSize = new System.Drawing.Size(791, 441);
+			this.Controls.Add(this.Kat_boxi);
 			this.Controls.Add(this.Check_pdf_click);
 			this.Controls.Add(this.Kustuta_btn_Click);
 			this.Controls.Add(this.Check_btn_click);
@@ -194,5 +208,6 @@
         private System.Windows.Forms.Button Check_btn_click;
         private System.Windows.Forms.Button Kustuta_btn_Click;
         private System.Windows.Forms.Button Check_pdf_click;
-    }
+		private System.Windows.Forms.Button Kat_boxi;
+	}
 }

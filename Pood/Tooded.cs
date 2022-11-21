@@ -14,7 +14,8 @@ namespace Pood
 {
 	public partial class Tooded : Form
 	{
-		SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+		//SqlConnection connect= new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\opilane\source\repos\Alina_Kolomoiets_TARpv21\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
+		SqlConnection connect = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\opilane\source\repos\Pood\Pood\AppData\Tooded_DB.mdf;Integrated Security = True");
 		SqlCommand cmd;
 		SqlDataAdapter adapter_toode, adapter_kat;
 		OpenFileDialog openFileDialog;
